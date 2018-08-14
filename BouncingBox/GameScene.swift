@@ -13,16 +13,10 @@ class GameScene: SKScene {
     private var boxes : [Box] = []
     
     override func didMove(to view: SKView) {
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
     }
     
     override func update(_ currentTime: TimeInterval) {
-        let top = size.height
-        let right = size.width
-
-        for box in boxes {
-            box.move()
-            box.maybeBounce(top: top, right: right)
-        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -41,7 +35,11 @@ class GameScene: SKScene {
             position: CGPoint(x: x, y: y)
         )
         addChild(box.node)
+        box.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
+        box.node.physicsBody?.restitution = 0.7
+        
         boxes.append(box)
+        // box.node.physicsBody?.applyImpulse(CGVector(dx: 2, dy: 3), at: location)
     }
     
 }

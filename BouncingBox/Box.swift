@@ -92,7 +92,6 @@ class Box {
         }
     }
     
-    
     func maybeBounce(top: CGFloat, right: CGFloat) {
         maybeBounceX(right: right)
         maybeBounceY(top: top)

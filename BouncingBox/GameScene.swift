@@ -14,6 +14,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        addObstacles()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -28,18 +29,36 @@ class GameScene: SKScene {
     func addBox(location: CGPoint) {
         let x = location.x
         let y = size.height - location.y
-        let box = Box(
-            size: CGFloat(50),
-            xSpeed: CGFloat(3.0),
-            ySpeed: CGFloat(3.0),
-            position: CGPoint(x: x, y: y)
-        )
-        addChild(box.node)
-        box.node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
-        box.node.physicsBody?.restitution = 0.7
         
-        boxes.append(box)
+        let boxSize = CGSize(width: CGFloat(50), height: CGFloat(50))
+        let xOffset = CGFloat(-boxSize.width / 2)
+        let yOffset = CGFloat(-boxSize.height / 2)
+        
+        let node = SKShapeNode(rect: CGRect(x: xOffset,
+                                            y: yOffset,
+                                            width: boxSize.width,
+                                            height: boxSize.height))
+        
+        node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
+        node.physicsBody?.restitution = 0.7
+        
+        node.position = CGPoint(x: x, y: y)
+        addChild(node)
         // box.node.physicsBody?.applyImpulse(CGVector(dx: 2, dy: 3), at: location)
     }
-    
+   
+    func addObstacles() {
+        let rect = CGRect(x: -100, y: -25, width: 200, height: 50)
+        let node = SKShapeNode(rect: rect)
+        node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 200, height: 50))
+        node.physicsBody?.affectedByGravity = false
+        node.physicsBody?.restitution = 0
+        // node.physicsBody?.isDynamic = false
+        
+        node.position = CGPoint(x: 200, y: 100)
+        addChild(node)
+        
+        node.physicsBody?.applyImpulse(CGVector(dx: 49, dy: 29), at: node.position)
+        // node.physicsBody?.applyForce(CGVector(dx: 49, dy: 29))
+    }
 }

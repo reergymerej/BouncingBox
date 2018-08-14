@@ -22,14 +22,23 @@ class GameScene: SKScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            addBox(location: touch.location(in: self.view))
+            // if we click a body, do something
+            let point = touch.location(in: self.view)
+            let x = point.x
+            let y = size.height - point.y
+            let altPoint = CGPoint(x: x, y: y)
+            if let body = physicsWorld.body(at: altPoint) {
+                let shove = CGVector(dx: -77, dy: 100)
+                body.applyImpulse(shove, at: altPoint)
+                // body.applyImpulse(impulse: shove, at: altPoint)
+            } else {
+                // otherwise, add a new box
+                addBox(location: altPoint)
+            }
         }
     }
     
     func addBox(location: CGPoint) {
-        let x = location.x
-        let y = size.height - location.y
-        
         let boxSize = CGSize(width: CGFloat(50), height: CGFloat(50))
         let xOffset = CGFloat(-boxSize.width / 2)
         let yOffset = CGFloat(-boxSize.height / 2)
@@ -40,9 +49,9 @@ class GameScene: SKScene {
                                             height: boxSize.height))
         
         node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
-        node.physicsBody?.restitution = 0.7
+        node.physicsBody?.restitution = 0.5
         
-        node.position = CGPoint(x: x, y: y)
+        node.position = location
         addChild(node)
         // box.node.physicsBody?.applyImpulse(CGVector(dx: 2, dy: 3), at: location)
     }
@@ -59,6 +68,5 @@ class GameScene: SKScene {
         addChild(node)
         
         node.physicsBody?.applyImpulse(CGVector(dx: 49, dy: 29), at: node.position)
-        // node.physicsBody?.applyForce(CGVector(dx: 49, dy: 29))
     }
 }

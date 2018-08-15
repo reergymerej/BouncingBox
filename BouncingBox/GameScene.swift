@@ -9,11 +9,13 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     private var boxes : [Box] = []
     
     override func didMove(to view: SKView) {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        
+        self.physicsWorld.contactDelegate = self
         addObstacles()
     }
     
@@ -47,9 +49,11 @@ class GameScene: SKScene {
                                             y: yOffset,
                                             width: boxSize.width,
                                             height: boxSize.height))
+        node.name = "box"
         
         node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
         node.physicsBody?.restitution = 0.5
+        node.physicsBody?.contactTestBitMask = 0b0001
         
         node.position = location
         addChild(node)
@@ -59,14 +63,28 @@ class GameScene: SKScene {
     func addObstacles() {
         let rect = CGRect(x: -100, y: -25, width: 200, height: 50)
         let node = SKShapeNode(rect: rect)
+        node.fillColor = .green
         node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 200, height: 50))
         node.physicsBody?.affectedByGravity = false
         node.physicsBody?.restitution = 0
-        // node.physicsBody?.isDynamic = false
-        
+        node.physicsBody?.mass = 10
+        node.physicsBody?.contactTestBitMask = 0b0001
+
         node.position = CGPoint(x: 200, y: 100)
         addChild(node)
         
         node.physicsBody?.applyImpulse(CGVector(dx: 49, dy: 29), at: node.position)
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        if let name = contact.bodyA.node?.name {
+            if let bNode = contact.bodyB.node {
+                if name == "box" && bNode.name == "box" {
+                    self.removeChildren(in: [bNode])
+                }
+
+            }
+        }
+
     }
 }

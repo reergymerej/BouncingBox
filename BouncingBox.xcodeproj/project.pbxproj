@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F6010A4A2121133600E31B19 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6010A492121133600E31B19 /* Box.swift */; };
+		F6010A4C2123A9AE00E31B19 /* dude01.png in Resources */ = {isa = PBXBuildFile; fileRef = F6010A4B2123A9AE00E31B19 /* dude01.png */; };
 		F6F5C29E211D14F100A6B8A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F5C29D211D14F100A6B8A4 /* AppDelegate.swift */; };
 		F6F5C2A4211D14F100A6B8A4 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F5C2A3211D14F100A6B8A4 /* GameScene.swift */; };
 		F6F5C2A6211D14F100A6B8A4 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F5C2A5211D14F100A6B8A4 /* GameViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		F6010A492121133600E31B19 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		F6010A4B2123A9AE00E31B19 /* dude01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dude01.png; sourceTree = SOURCE_ROOT; };
 		F6F5C29A211D14F100A6B8A4 /* BouncingBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BouncingBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6F5C29D211D14F100A6B8A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6F5C2A3211D14F100A6B8A4 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		F6F5C29C211D14F100A6B8A4 /* BouncingBox */ = {
 			isa = PBXGroup;
 			children = (
+				F6010A4B2123A9AE00E31B19 /* dude01.png */,
 				F6F5C29D211D14F100A6B8A4 /* AppDelegate.swift */,
 				F6F5C2A3211D14F100A6B8A4 /* GameScene.swift */,
 				F6F5C2A5211D14F100A6B8A4 /* GameViewController.swift */,
@@ -128,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6010A4C2123A9AE00E31B19 /* dude01.png in Resources */,
 				F6F5C2A9211D14F100A6B8A4 /* Main.storyboard in Resources */,
 				F6F5C2AB211D14F200A6B8A4 /* Assets.xcassets in Resources */,
 				F6F5C2AE211D14F200A6B8A4 /* LaunchScreen.storyboard in Resources */,

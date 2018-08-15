@@ -14,13 +14,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        
         self.physicsWorld.contactDelegate = self
         addObstacles()
     }
     
-    override func update(_ currentTime: TimeInterval) {
-    }
+    // override func update(_ currentTime: TimeInterval) {
+    // }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
@@ -35,7 +34,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 // body.applyImpulse(impulse: shove, at: altPoint)
             } else {
                 // otherwise, add a new box
-                addBox(location: altPoint)
+                // addBox(location: altPoint)
+                addDude(location: altPoint)
             }
         }
     }
@@ -79,12 +79,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if let name = contact.bodyA.node?.name {
             if let bNode = contact.bodyB.node {
-                if name == "box" && bNode.name == "box" {
+                if name == "dude" && bNode.name == "dude" {
                     self.removeChildren(in: [bNode])
                 }
 
             }
         }
 
+    }
+    
+    func addDude(location: CGPoint?) {
+        let node = SKSpriteNode(imageNamed: "dude01.png")
+        node.name = "dude"
+        node.position = CGPoint(x: 200, y: 300)
+        
+        node.physicsBody = SKPhysicsBody(texture: node.texture!, size: node.size)
+        node.physicsBody?.contactTestBitMask = 0b0001
+        
+        if location != nil {
+            node.position = location!
+        }
+        
+        self.addChild(node)
     }
 }
